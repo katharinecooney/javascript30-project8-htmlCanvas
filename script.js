@@ -14,6 +14,7 @@ let isDrawing = false;
 let lastX;
 let lastY;
 let hue = 0;
+let modifyLineWidth = true;
 
 draw = (event) => {
   if (!isDrawing) return;
@@ -30,6 +31,16 @@ draw = (event) => {
   lastX = event.offsetX;
   lastY = event.offsetY;
   hue++;
+
+  if (ctx.lineWidth > 50 || ctx.lineWidth <= 10) {
+    modifyLineWidth = !modifyLineWidth;
+  }
+  if(modifyLineWidth) { 
+    ctx.lineWidth++;
+  } else {
+    ctx.lineWidth--;
+  }
+  
 }
 
 canvas.addEventListener('mousemove', draw);
