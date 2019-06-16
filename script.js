@@ -16,6 +16,13 @@ let lastY = 0;
 draw = (event) => {
   if (!isDrawing) return;
   console.log(event);
+  // begin a path
+  ctx.beginPath();
+  // specify the path; it must start at an initial (x,y) and end at a final (x,y)
+  ctx.moveTo(lastX, lastY);
+  ctx.lineTo(event.offsetX, event.offsetY);
+  // draw the line
+  ctx.stroke();
 }
 
 canvas.addEventListener('mousemove', draw);
