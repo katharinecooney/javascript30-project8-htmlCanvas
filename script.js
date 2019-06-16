@@ -1,7 +1,6 @@
 const canvas = document.querySelector('#draw');
 
 // we cannot draw directly on the canvas; we draw on the context, which can be 2d or 3d
-
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -9,6 +8,7 @@ ctx.strokeStyle = '#BADASS';
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
 ctx.lineWidth = 20;
+ctx.globalCompositeOperation = 'soft-light';
 
 let isDrawing = false;
 let lastX;
@@ -40,9 +40,9 @@ draw = (event) => {
   } else {
     ctx.lineWidth--;
   }
-  
 }
 
+// these two event listeners allow the user to draw
 canvas.addEventListener('mousemove', draw);
 canvas.addEventListener('mousedown', () => {
   isDrawing = true;
@@ -50,5 +50,7 @@ canvas.addEventListener('mousedown', () => {
   lastX = event.offsetX;
   lastY = event.offsetY;
 });
+
+// these two event listeners prevent the user from drawing
 canvas.addEventListener('mouseup', () => isDrawing = false);
 canvas.addEventListener('mouseout', () => isDrawing = false);
